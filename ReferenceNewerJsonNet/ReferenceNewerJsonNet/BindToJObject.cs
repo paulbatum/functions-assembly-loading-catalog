@@ -11,9 +11,13 @@ namespace ReferenceNewerJsonNet
 {
     public static class BindToJObject
     {
+        /// <summary>
+        /// WORKING (TODO: get @fabiocav to explain how this works to me as I expected it was broken)
+        /// </summary>        
         [FunctionName("BindToJObject")]
         public static string Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] JObject body, TraceWriter log)
         {
+            log.Info($"JSON.NET user code version: {typeof(JObject).Assembly.FullName}");            
             return body.Properties().First().Value.ToString();
         }        
     }
