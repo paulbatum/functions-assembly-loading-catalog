@@ -17,11 +17,11 @@ namespace ReferenceNewerJsonNet
         /// </summary>
         [FunctionName("UseJObjectInResponseDirectly")]
         public static HttpResponseMessage UseJObjectInResponseDirectly([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
-        {            
+        {
+            log.Info($"JSON.NET user code version: {typeof(JObject).Assembly.FullName}");
             var result = new JObject
             {
-                {"message", "Hello, World" },
-                {"jsonVersion", typeof(JObject).Assembly.FullName }
+                {"message", "Hello, World" }
             };            
 
             return req.CreateResponse(HttpStatusCode.OK, result);
@@ -33,10 +33,10 @@ namespace ReferenceNewerJsonNet
         [FunctionName("UseJObjectInResponseViaStringContent")]
         public static HttpResponseMessage UseJObjectInResponseViaStringContent([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
         {
+            log.Info($"JSON.NET user code version: {typeof(JObject).Assembly.FullName}");
             var result = new JObject
             {
-                {"message", "Hello, World" },
-                {"jsonVersion", typeof(JObject).Assembly.FullName }
+                {"message", "Hello, World" }
             };
 
             var response =  req.CreateResponse(HttpStatusCode.OK);
