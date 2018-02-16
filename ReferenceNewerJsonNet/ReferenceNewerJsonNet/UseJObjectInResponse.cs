@@ -28,7 +28,7 @@ namespace ReferenceNewerJsonNet
         }
 
         /// <summary>
-        /// BROKEN - this example does not work correctly because functions fails to recognize that the result object is a JObject because the project is referencing JSON.NET version 10.x
+        /// WORKING - this example works correctly because no exchange of types occurs
         /// </summary>
         [FunctionName("UseJObjectInResponseViaStringContent")]
         public static HttpResponseMessage UseJObjectInResponseViaStringContent([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
