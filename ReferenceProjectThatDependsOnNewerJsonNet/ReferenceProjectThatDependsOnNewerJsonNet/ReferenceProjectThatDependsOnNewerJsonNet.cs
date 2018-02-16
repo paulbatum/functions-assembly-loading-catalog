@@ -12,7 +12,8 @@ namespace ReferenceProjectThatDependsOnNewerJsonNet
     public static class ReferenceProjectThatDependsOnNewerJsonNet
     {
         /// <summary>        
-        /// DOES NOT COMPILE due to version conflicts        
+        /// WORKING - This works because of the explicit Json.NET reference and the fact that there is no exchange of Json.NET types between the user code and the functions runtime
+        /// Note that if you remove the explicit reference to Json.NET 10.0.3 from this project then it will stop compiling due to the version conflict
         /// </summary>
         [FunctionName("ReferenceProjectThatDependsOnNewerJsonNet")]
         public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
