@@ -8,8 +8,7 @@ namespace ReferenceNewerStorageSDK
     public static class BindToQueueMessage
     {
         /// <summary>
-        /// Needed to pull in the newer Newtonsoft.Json transient dependency on Storage.
-        /// Does not work - throws error on trigger as it is unable to serialize to this type.
+        /// DOES NOT WORK - throws error on trigger as it is unable to serialize to this type.
         /// </summary>
         [Disable()]
         [FunctionName("BindToQueueMessage")]
