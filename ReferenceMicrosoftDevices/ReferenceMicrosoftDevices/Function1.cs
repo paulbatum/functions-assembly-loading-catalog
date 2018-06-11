@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices;
+using Microsoft.Azure.Devices.Shared;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
@@ -22,7 +23,16 @@ namespace ReferenceMicrosoftDevices
         {
             log.Info("C# HTTP trigger function processed a request.");
 
-            await serviceClient.SendAsync("myDevice", new Message(Encoding.UTF8.GetBytes("Hello IoT")));
+            var registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+            IQuery query = registryManager.CreateQuery("SELECT * FROM devices", 10000);
+            while (query.HasMoreResults)
+            {
+                var page = await query.GetNextAsTwinAsync();
+                foreach (Twin twin in page)
+                {
+                    Console.WriteLine(twin.DeviceId);
+                }
+            }
 
             return req.CreateResponse(HttpStatusCode.OK);
         }
